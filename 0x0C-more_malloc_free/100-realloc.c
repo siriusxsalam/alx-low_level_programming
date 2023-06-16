@@ -50,5 +50,6 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		}
 	}
 
-	return (free(ptr), p1);
+	free(ptr);
+	return (p1);
 }

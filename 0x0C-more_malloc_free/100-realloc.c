@@ -39,7 +39,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 
 	if (new_size > old_size)
 	{
-		i = -1
+		i = -1;
 		while (++i < old_size)
 			p1[i] = op[i];
 	}

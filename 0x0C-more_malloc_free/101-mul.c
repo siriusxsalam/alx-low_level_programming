@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 		return (1);
 	i = -1;
 	while (++i <= l1 + l2)
-		result[i] = 0;
+		r[i] = 0;
 	while (--l1 >= 0)
 	{
 		d1 = s1[l1] - '0';

@@ -19,15 +19,11 @@ unsigned int binary_to_uint(const char *b)
 			return (0);
 	}
 
-	pow = 1;
-	r = 0;
-	l--;
-	while (l >= 0)
+	for (pow = 1, r = 0, l--; l >= 0; l--, pow *= 2)
 	{
 		if (b[l] == '1')
 			r += pow;
-		pow = pow * 2;
-		l--;
 	}
 	return (r);
+
 }

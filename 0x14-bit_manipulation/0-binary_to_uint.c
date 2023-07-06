@@ -8,12 +8,12 @@
 unsigned int binary_to_uint(const char *b)
 {
 	unsigned int r, pow;
-	int l = -1;
+	int l;
 
 	if (b == NULL)
 		return (0);
 
-	while (b[++l])
+	for (l = 0; b[l]; l++)
 	{
 		if (b[l] != '0' && b[l] != '1')
 			return (0);
@@ -24,6 +24,6 @@ unsigned int binary_to_uint(const char *b)
 		if (b[l] == '1')
 			r += pow;
 	}
-	return (r);
 
+	return (r);
 }

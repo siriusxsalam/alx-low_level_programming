@@ -21,11 +21,13 @@ unsigned int binary_to_uint(const char *b)
 
 	pow = 1;
 	r = 0;
-	while (--l >= 0)
+	l--;
+	while (l >= 0)
 	{
 		if (b[l] == '1')
 			r += pow;
 		pow = pow * 2;
+		l--;
 	}
 	return (r);
 }

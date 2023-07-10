@@ -254,22 +254,22 @@ void close_elf(int elf)
  * Description: If the file is not an ELF File or
  *              the function fails - exit code 98.
  */
-int main(int __attribute__((__unused__)) ac, char *av[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
 	Elf64_Ehdr *h;
 	int op, re;
 
-	op = open(av[1], O_RDONLY);
+	op = open(argv[1], O_RDONLY);
 	if (op == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", av[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
 	h = malloc(sizeof(Elf64_Ehdr));
 	if (h == NULL)
 	{
 		close_elf(op);
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", av[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
 		exit(98);
 	}
 	re = read(op, h, sizeof(Elf64_Ehdr));
@@ -277,7 +277,7 @@ int main(int __attribute__((__unused__)) ac, char *av[])
 	{
 		free(h);
 		close_elf(op);
-		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", av[1]);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
 		exit(98);
 	}
 

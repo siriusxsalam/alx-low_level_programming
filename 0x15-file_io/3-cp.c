@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
 		}
 
 		re = read(f, buf, 1024);
-		t = open(argg[2], O_WRONLY | O_APPEND);
+		t = open(argv[2], O_WRONLY | O_APPEND);
 
 	} while (re > 0);
 

@@ -8,7 +8,6 @@
 /**
  * check_elf - Checks if a file is an ELF file.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
- *
  * Description: If the file is not an ELF file - exit code 98.
  */
 void check_elf(unsigned char *e_ident)
@@ -217,7 +216,6 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 
 	if (e_ident[EI_CLASS] == ELFCLASS32)
 		printf("%#x\n", (unsigned int)e_entry);
-
 	else
 		printf("%#lx\n", e_entry);
 }
@@ -244,30 +242,30 @@ void close_elf(int elf)
  * Description: If the file is not an ELF File or
  *              the function fails - exit code 98.
  */
-int main(int __attribute__((__unused__)) argc, char *argv[])
+int main(int __attribute__((__unused__)) ac, char *av[])
 {
 	Elf64_Ehdr *h;
-	int open, read;
+	int op, re;
 
-	open = open(argv[1], O_RDONLY);
-	if (open == -1)
+	op = open(av[1], O_RDONLY);
+	if (op == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", av[1]);
 		exit(98);
 	}
 	h = malloc(sizeof(Elf64_Ehdr));
 	if (h == NULL)
 	{
-		close_elf(open);
-		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", argv[1]);
+		close_elf(op);
+		dprintf(STDERR_FILENO, "Error: Can't read file %s\n", av[1]);
 		exit(98);
 	}
-	read = read(open, header, sizeof(Elf64_Ehdr));
-	if (read == -1)
+	re = read(op, h, sizeof(Elf64_Ehdr));
+	if (re == -1)
 	{
 		free(h);
-		close_elf(open);
-		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", argv[1]);
+		close_elf(op);
+		dprintf(STDERR_FILENO, "Error: `%s`: No such file\n", av[1]);
 		exit(98);
 	}
 
@@ -283,6 +281,6 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	print_entry(h->e_entry, h->e_ident);
 
 	free(h);
-	close_elf(open);
+	close_elf(op);
 	return (0);
 }
